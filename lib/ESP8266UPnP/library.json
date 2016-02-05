@@ -1,0 +1,13 @@
+{
+    "name": "ESP8266UPnP",
+    "keywords": "UPnP",
+    "description": "",
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/shirriff/Arduino-IRremote.git"
+    },
+    "platforms": "espressif",
+    "frameworks": "arduino",
+    "boards": "nodemcu"
+}
