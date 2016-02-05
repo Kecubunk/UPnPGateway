@@ -34,7 +34,6 @@ License (MIT license):
 #include "UPnPDevice.h"
 #include <WiFiUdp.h>
 #include <string>
-#include <sstream>
 
 #define UPnP_INTERVAL 1200
 #define UPnP_PORT 1900

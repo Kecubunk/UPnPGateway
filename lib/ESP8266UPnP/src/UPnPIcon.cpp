@@ -10,15 +10,25 @@ bool UPnPIcon::operator==(const UPnPIcon &param) {
 }
 
 string UPnPIcon::getIconXML() {
-  ostringstream stream;
-  stream << "<icon>"
-         << "<mimetype>" << mimetype << "</mimetype>"
-         << "<height>" << height << "</height>"
-         << "<width>" << width << "</width>"
-         << "<depth>" << depth << "</depth>"
-         << "<url>" << url << "</url>"
-         << "</icon>";
-  return stream.str();
+  string stream;
+  stream = "<icon>";
+  stream += "<mimetype>";
+  stream += mimetype;
+  stream += "</mimetype>";
+  stream += "<height>";
+  stream += height;
+  stream += "</height>";
+  stream += "<width>";
+  stream += width;
+  stream += "</width>";
+  stream += "<depth>";
+  stream += depth;
+  stream += "</depth>";
+  stream += "<url>";
+  stream += url;
+  stream += "</url>";
+  stream += "</icon>";
+  return stream;
 }
 
 // Setters

@@ -10,16 +10,27 @@ bool UPnPService::operator==(const UPnPService &param) {
 }
 
 string UPnPService::getServiceXML() {
-  ostringstream stream;
-  stream << "<service>"
-         << "<serviceType>urn:schemas-upnp-org:service:" << type << ":"
-         << version << "</serviceType>"
-         << "<serviceId>urn:upnp-org:serviceId:" << id << "</serviceId>"
-         << "<SCPDURL>" << SCPDURL << "</SCPDURL>"
-         << "<controlURL>" << controlURL << "</controlURL>"
-         << "<eventSubURL>" << eventSubURL << "</eventSubURL>"
-         << "</service>";
-  return stream.str();
+  string stream;
+  stream = "<service>";
+  stream += "<serviceType>urn:schemas-upnp-org:service:";
+  stream += type;
+  stream += ":";
+  stream += version;
+  stream += "</serviceType>";
+  stream += "<serviceId>urn:upnp-org:serviceId:";
+  stream += id;
+  stream += "</serviceId>";
+  stream += "<SCPDURL>";
+  stream += SCPDURL;
+  stream += "</SCPDURL>";
+  stream += "<controlURL>";
+  stream += controlURL;
+  stream += "</controlURL>";
+  stream += "<eventSubURL>";
+  stream += eventSubURL;
+  stream += "</eventSubURL>";
+  stream += "</service>";
+  return stream;
 }
 
 // Setters

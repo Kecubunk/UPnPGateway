@@ -4,7 +4,6 @@
 #include "UPnPService.h"
 #include <string>
 #include <list>
-#include <sstream>
 
 using namespace std;
 

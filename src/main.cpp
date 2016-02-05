@@ -3,8 +3,6 @@
 #include <OneWire.h>
 #include <DS2438.h>
 #include <ESP8266WiFi.h>
-#include "UPnPDevice.h"
-#include "UPnPService.h"
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
 

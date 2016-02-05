@@ -102,26 +102,46 @@ bool UPnPEnv::begin() {
 }
 
 void UPnPEnv::send(upnp_method_t method) {
-  String MyIp = String(WiFi.localIP()[0]) + "." + String(WiFi.localIP()[2]) +
-                "." + String(WiFi.localIP()[2]) + "." +
-                String(WiFi.localIP()[3]);
+  string MyIp;
+  MyIp = char(WiFi.localIP()[0]);
+  MyIp += ".";
+  MyIp += char(WiFi.localIP()[2]);
+  MyIp += ".";
+  MyIp += char(WiFi.localIP()[2]);
+  MyIp += ".";
+  MyIp += char(WiFi.localIP()[3]);
 
-  std::ostringstream buffer;
+  string buffer;
 
   if (method == NONE)
-    buffer << ssdp_response_template;
+    buffer = ssdp_response_template;
   else
-    buffer << ssdp_notify_template;
+    buffer = ssdp_notify_template;
 
-  buffer << "CACHE-CONTROL: max-age=" << UPnP_INTERVAL << "\r\n"
-         << "SERVER: Arduino/1.0 UPNP/1.1 " << device.getModelName() << "/"
-         << device.getModelNumber() << "\r\n"
-         << "USN: uuid:" << device.getUuid() << "\r\n"
-         << "LOCATION: http://" << MyIp << ":" << port << "/" << schemaURL
-         << "\r\n"
-         << "\r\n";
+  char tmp[16];
+  itoa(UPnP_INTERVAL, tmp, 15);
 
-  string strBuffer = buffer.str();
+  buffer += "CACHE-CONTROL: max-age=";
+  buffer += tmp;
+  buffer += "\r\n";
+  buffer += "SERVER: Arduino/1.0 UPNP/1.1 ";
+  buffer += device.getModelName();
+  buffer += "/";
+  buffer += device.getModelNumber();
+  buffer += "\r\n";
+  buffer += "USN: uuid:";
+  buffer += device.getUuid();
+  buffer += "\r\n";
+  buffer += "LOCATION: http://";
+  buffer += MyIp;
+  buffer += ":";
+  buffer += port;
+  buffer += "/";
+  buffer += schemaURL;
+  buffer += "\r\n";
+  buffer += "\r\n";
+
+  string strBuffer = buffer;
 
   int len = strBuffer.size();
 

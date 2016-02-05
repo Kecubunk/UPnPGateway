@@ -30,57 +30,79 @@ bool UPnPDevice::emptyServiceList() { return serviceList.empty(); }
 bool UPnPDevice::emptyIconList() { return iconList.empty(); }
 
 string UPnPDevice::getDeviceXML() {
-  ostringstream stream;
-  stream << "HTTP/1.1 200 OK\r\n"
-         << "Content-Type: text/xml\r\n"
-         << "Connection: close\r\n"
-         << "Access-Control-Allow-Origin: *\r\n"
-         << "\r\n"
-         << "<?xml version=\"1.0\"?>"
-         << "<root xmlns=\"urn:schemas-upnp-org:device-1-0\">"
-         << "<specVersion>"
-         << "<major>2</major>"
-         << "<minor>0</minor>"
-         << "</specVersion>"
-         << "<device>"
-         << "<deviceType>" << deviceType << "</deviceType>"
-         << "<friendlyName>" << friendlyName << "</friendlyName>"
-         << "<manufacturer>" << manufacturer << "</manufacturer>"
-         << "<manufacturerURL>" << manufacturerURL << "</manufacturerURL>"
-         << "<modelDescription>" << modelDescription << "</modelDescription>"
-         << "<modelName>" << modelName << "</modelName>"
-         << "<modelNumber>" << modelNumber << "</modelNumber>"
-         << "<modelURL>" << modelURL << "</modelURL>"
-         << "<serialNumber>" << serialNumber << "</serialNumber>"
-         << "<UDN>uuid:" << uuid << "</UDN>"
-         << "<presentationURL>" << presentationURL << "</presentationURL>"
-         << "</root>\r\n"
-         << "\r\n";
+  string stream;
+  stream = "HTTP/1.1 200 OK\r\n";
+  stream += "Content-Type: text/xml\r\n";
+  stream += "Connection: close\r\n";
+  stream += "Access-Control-Allow-Origin: *\r\n";
+  stream += "\r\n";
+  stream += "<?xml version=\"1.0\"?>";
+  stream += "<root xmlns=\"urn:schemas-upnp-org:device-1-0\">";
+  stream += "<specVersion>";
+  stream += "<major>2</major>";
+  stream += "<minor>0</minor>";
+  stream += "</specVersion>";
+  stream += "<device>";
+  stream += "<deviceType>";
+  stream += deviceType;
+  stream += "</deviceType>";
+  stream += "<friendlyName>";
+  stream += friendlyName;
+  stream += "</friendlyName>";
+  stream += "<manufacturer>";
+  stream += manufacturer;
+  stream += "</manufacturer>";
+  stream += "<manufacturerURL>";
+  stream += manufacturerURL;
+  stream += "</manufacturerURL>";
+  stream += "<modelDescription>";
+  stream += modelDescription;
+  stream += "</modelDescription>";
+  stream += "<modelName>";
+  stream += modelName;
+  stream += "</modelName>";
+  stream += "<modelNumber>";
+  stream += modelNumber;
+  stream += "</modelNumber>";
+  stream += "<modelURL>";
+  stream += modelURL;
+  stream += "</modelURL>";
+  stream += "<serialNumber>";
+  stream += serialNumber;
+  stream += "</serialNumber>";
+  stream += "<UDN>uuid:";
+  stream += uuid;
+  stream += "</UDN>";
+  stream += "<presentationURL>";
+  stream += presentationURL;
+  stream += "</presentationURL>";
+  stream += "</root>\r\n";
+  stream += "\r\n";
   if (!emptyIconList()) {
-    stream << "<iconList>";
+    stream += "<iconList>";
     for (list<UPnPIcon>::iterator it = iconList.begin(); it != iconList.end();
          ++it)
-      stream << (*it).getIconXML();
-    stream << "</iconList>";
+      stream += (*it).getIconXML();
+    stream += "</iconList>";
   }
 
   if (!emptyServiceList()) {
-    stream << "<serviceList>";
+    stream += "<serviceList>";
     for (list<UPnPService>::iterator it = serviceList.begin();
          it != serviceList.end(); ++it)
-      stream << (*it).getServiceXML();
-    stream << "</serviceList>";
+      stream += (*it).getServiceXML();
+    stream += "</serviceList>";
   }
 
   if (!emptyDeviceList()) {
-    stream << "<deviceList>";
+    stream += "<deviceList>";
     for (list<UPnPDevice>::iterator it = deviceList.begin();
          it != deviceList.end(); ++it)
-      stream << (*it).getDeviceXML();
-    stream << "</deviceList>";
+      stream += (*it).getDeviceXML();
+    stream += "</deviceList>";
   }
 
-  return stream.str();
+  return stream;
 }
 
 // Setters
